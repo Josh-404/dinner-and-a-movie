@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+#movieTitles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+
+.movieDIV {
+    display: flex;
+    margin-top: 10px;
+    background-color: ghostwhite;
+}
