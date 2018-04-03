@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Dinner and a Movie Search</title>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="jumbotron bg-info text-white">
+            <h1 class="text-center">Dinner and a Movie</h1>
+            <br>
+            <p class="text-center">Want to catch a movie and find a restaurant nearby to grab dinner? We can help!</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-info text-white text-center">
+                Give Us Some Info!
+            </div>
+            <form class="container userForm">
+                <div class="form-group">
+                    <label for="movieDate"> <strong>What Day Do You Want to See a Movie?</strong> </label>
+                    <input type="date" class="form-control" id="movieDate" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="zipCode"> <strong>What's Your Zip Code?</strong></label>
+                    <input type="number" class="form-control" id="zipCode" placeholder="ex. 60647">
+                </div>
+            </form>
+            <button type="submit" class="btn btn-primary btn-dark" id="submitButton">Search</button>
+        </div>
+
+        <div id="movieTitles"></div>
+
+        <div class="card" id="theatresShowtimes">Placeholder: Theatres and Showtimes will display here after the user clicks on a movie title</div>
+        <br>
+        <div class="card" id="nearbyRestaurants">Placeholder: Restaurant options will display here after the user selects a theatre</div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="./assets/javascript/app.js"></script>
+</body>
+</html>
