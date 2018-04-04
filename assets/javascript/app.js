@@ -18,7 +18,7 @@ $("#submitButton").on("click", function () {
     var apiKey = "gkd947dfsy5spd8zcruwcwa6";
     var movieDate = userDate;
     var zipCode = userZipCode;
-    var queryURL = "http://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;
+    var queryURL = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;
     console.log(queryURL);
 
     // Make an AJAX call to the movie API to get data back
