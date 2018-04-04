@@ -1,3 +1,5 @@
+var movieData ;
+
 function submitUserInfo () {
 
 $("#submitButton").on("click", function () {
@@ -24,25 +26,34 @@ $("#submitButton").on("click", function () {
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        console.log(response);
+        
+        // Store the JSON response in a variable
+        movieData = response;
+        console.log(movieData);
 
         // Looping over the results in the JSON object...
-        for (var i = 0; i < response.length; i++) {
+        for (var i = 0; i < movieData.length; i++) {
         
             // Create a DIV to hold each of our movie titles and its description
             var movieDisplayDiv = $("<div>").addClass("movieDIV").addClass("card").attr("style", "width: 18rem");
 
             // Create a variable to hold each movie title
-            var movieTitle = response[i].title;
+            var movieTitle = [];
+            movieTitle = movieData[i].title;
+            console.log(movieTitle);
+
+            var movieID = [];
+            movieID = movieData[i].tmsId;
+            console.log(movieID);
 
             // Create an inner DIV for each movie title and description to utilize the card component from Bootstrap
-            var innerMovieDiv = $("<div>").addClass("card-body").attr("id", movieTitle);
+            var innerMovieDiv = $("<div>").addClass("card-body");
 
             // Display the movie title in each individual DIV
-            var titleDisplay = $("<h5>").text(movieTitle).addClass("movieTitle").addClass("card-title");
+            var titleDisplay = $("<h5>").text(movieTitle).addClass("card-title").attr("id", movieID);
 
             // Create a variable to hold each movie description
-            var movieDescr = response[i].shortDescription;
+            var movieDescr = movieData[i].shortDescription;
 
             // Display the movie description in each individual DIV
             var descrDisplay = $("<h6>").text(movieDescr).addClass("movieDescr").addClass("card-title");
@@ -53,15 +64,41 @@ $("#submitButton").on("click", function () {
             movieDisplayDiv.append(innerMovieDiv);
 
             // Add all the movies to an existing DIV on the apge called movieTitles
-            $("#movieTitles").prepend(movieDisplayDiv);
+            $("#movieTitles").append(movieDisplayDiv);
         }
-
     });
 });
-
 }
 // Call the function
 submitUserInfo();
+
+$(document).on("click", "h5", function () {
+    //console.log("clicked");
+
+    var movieID = $(this).attr("id");
+    console.log(movieID);
+
+    var selectedMovie = movieData.find(function(element) {
+        return element.tmsId == movieID;
+    });
+
+    // for (var i = 0; selectedMovie.showtimes[i] < movieData.length; i++) {
+    //     var movieShowtimes = [];
+    //     movieShowtimes = selectedMovie.showtimes[i].dateTime;
+    //     console.log("Showtimes: " + movieShowtimes);
+    // }
+      
+    var testList = $("<ul>").addClass("testClass");
+
+    var testListItem = $("<li>").text("Here's some text");
+
+    testList.append(testListItem);
+
+    $(this).parent().append(testList);
+    
+});
+// Call the function
+
 
 
   // Testing getting information back from the JSON object
@@ -73,7 +110,7 @@ submitUserInfo();
             // var movieShowtimes = response[i].showtimes[i].dateTime;
             // console.log("Heres are all the showtime: " + movieShowtimes);
             
-            // var movieShowtimes = response[i].showtimes[i].theatre.name;
+            // var movieTheatres = response[i].showtimes[i].theatre.name;
             // console.log("Heres are all the movie theatres: " + movieShowtimes);
     // ---------------------------------------------------------------------------
 
