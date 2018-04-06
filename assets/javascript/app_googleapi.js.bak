@@ -8,14 +8,14 @@ var latitude;
 var longitude;
 // ***************************
 
-$("#submitButton").on("click", function (event) {
+$("#add-zip").on("click", function (event) {
   event.preventDefault();
   $("#geolocation-appear-here").empty();
   $("#restaurant-appear-here").empty();
   console.log("****** Button Clicked ******");
 
-  var zipCode = $("#zipCode").val();
-  $("#zipCode").val("");
+  var zipCode = $("#zipcode-input").val();
+  $("#zipcode-input").val("");
   console.log("Zip Code: " + zipCode);
   var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + zipCode + "&key=AIzaSyD2nn48mhiIlV_nDEM-7OTtVwU22wOQa5Y"
   
@@ -97,8 +97,8 @@ $("#submitButton").on("click", function (event) {
       restDisplayDiv.append(innerRestDiv);
 
       // Add all the movies to an existing DIV on the apge called movieTitles
-      // $("#restaurant-appear-here").prepend(restDisplayDiv);
-      $("#nearbyRestaurants").prepend(restDisplayDiv);
+      $("#restaurant-appear-here").prepend(restDisplayDiv);
+      // $("#nearbyRestaurants").prepend(restDisplayDiv);
 
   }
 

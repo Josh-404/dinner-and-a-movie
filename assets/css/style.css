@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-#movieTitles {
+#movieTitles, #nearbyRestaurants {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -10,7 +10,7 @@
     margin: 5px;
 }
 
-.movieDIV {
+.movieDIV, .restDIV {
     display: flex;
     margin-top: 10px;
     background-color: ghostwhite;
