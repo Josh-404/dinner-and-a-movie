@@ -14,7 +14,7 @@ function submitUserInfo() {
         console.log("This is the user entered zip: " + userZipCode);
 
         // Local Storage
-        // Clear absolutely everything stored in localStorage using localStorage.clear()
+        // Clear absolutely everything stored in localStoßrage using localStorage.clear()
         localStorage.clear();
 
         // Store the zipcode into localStorage using "localStorage.setItem"
@@ -26,7 +26,8 @@ function submitUserInfo() {
         $("#zipCode").val("");
 
         // Create variables to hold the information needed to submit the API call
-        var apiKey = "gkd947dfsy5spd8zcruwcwa6";
+        // var apiKey = "gkd947dfsy5spd8zcruwcwa6"; //Liz's API Key
+        var apiKey = "juzanm2r7beucstd9975h2sk"; //Alfredo's API Key
         var movieDate = userDate;
         var zipCode = userZipCode;
         var queryURL = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;

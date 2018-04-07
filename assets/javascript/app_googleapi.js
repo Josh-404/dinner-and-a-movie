@@ -57,7 +57,7 @@ function googlePlacesCall() {
       var innerRestDiv = $("<div>").addClass("card-body").attr("id", restName);
 
       // Display the restaurant name in each individual DIV
-      var nameDisplay = $("<h5>").text("Restaurant Name: " + restName).addClass("restName").addClass("card-title");
+      var nameDisplay = $("<h5>").text(restName).addClass("restName").addClass("card-title");
 
       // Create a variable to hold each Restaurant description
 
