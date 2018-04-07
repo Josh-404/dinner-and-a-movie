@@ -28,19 +28,17 @@
             <div class="card-header bg-info text-white text-center">
                 Give Us Some Info!
             </div>
-            <form class="container userForm">
+            <form class="container userForm" id="validateForm">
                 <div class="form-group">
-                    <label for="movieDate"> <strong>What Day Do You Want to See a Movie?</strong> </label>
+                    <label for="movieDate"><strong>What Day Do You Want to See a Movie?</strong></label>
                     <input type="date" class="form-control" id="movieDate" required>
                     <div id ="errorTextDate"></div>
-                </div>
-                <div class="form-group">
-                    <label for="zipCode"> <strong>What's Your Zip Code?</strong></label>
-                    <input type="number" class="form-control" id="zipCode"  placeholder="ex. 60647" required>
+                    <label for="zipCode"><strong>What's Your Zip Code?</strong></label>
+                    <input type="number" class="form-control" id="zipCode" placeholder="ex. 60647" required>
                     <div id ="errorTextZip"></div>
+                    <button type="submit" class="btn btn-primary btn-dark" id="submitButton">Search</button>
                 </div>
             </form>
-            <button type="submit" class="btn btn-primary btn-dark" id="submitButton">Search</button>
         </div>
 
         <div id="movieTitles"></div>

@@ -83,6 +83,9 @@ function submitUserInfo() {
         if (inputValidation(userZipCode, userDate)) {
             // Calling SaveData() to store info in Firebase
             saveData(userDate, userZipCode, movieTitle, theaterName, movieTime);
+            // Local Storage
+            // Clear absolutely everything stored in localStoßrage using localStorage.clear()
+            localStorage.clear();
 
             // Empty the fields when the submit button is clicked
             $("#movieDate").val("");
@@ -102,6 +105,13 @@ function submitUserInfo() {
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
+            // Create variables to hold the information needed to submit the API call
+            // var apiKey = "gkd947dfsy5spd8zcruwcwa6"; //Liz's API Key
+            var apiKey = "juzanm2r7beucstd9975h2sk"; //Alfredo's API Key
+            var movieDate = userDate;
+            var zipCode = userZipCode;
+            var queryURL = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;
+            console.log(queryURL);
 
                 // Store the JSON response in a variable
                 movieData = response;
