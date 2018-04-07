@@ -6,6 +6,20 @@
 var georesults;
 var latitude;
 var longitude;
+
+// ***************************
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyA7G2xyyMsQpQ22H3YEq7Nv5MVuiGamad8",
+  authDomain: "dinner-and-a-movie-200002.firebaseapp.com",
+  databaseURL: "https://dinner-and-a-movie-200002.firebaseio.com",
+  projectId: "dinner-and-a-movie-200002",
+  storageBucket: "",
+  messagingSenderId: "814272938765"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
 // ***************************
 
 console.log("****** Button Clicked ******");
