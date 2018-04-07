@@ -1,4 +1,7 @@
+// ***************************
+// GLOBAL VARIABLE DECLARATION
 var movieData;
+// ***************************
 
 function submitUserInfo() {
 
@@ -81,134 +84,72 @@ function submitUserInfo() {
 submitUserInfo();
 
 $(document).on("click", "h5", function () {
-    //console.log("clicked");
-
+    // Using 'this', create a variable that grabs the movie ID in the id attribute for the specific movie title that the user has clicked on.
     var movieID = $(this).attr("id");
     console.log(movieID);
 
-    var selectedMovie = movieData.find(function (element) {
-        return element.tmsId == movieID;
+    // Create a variable that returns the index number of the movie that matches that movie ID that was clicked. We can use this index number to plug into the for loop to only loop through that movie's showtimes.
+    var selectedMovie = movieData.findIndex(function(movie) {
+        return movie.tmsId === movieID;
     });
+    console.log("This is the selected movie's index: " + selectedMovie);
+   
+    // Create an empty array that will hold a list of generated objects containing each movie theatre and showtime.
+    var movieTheatres = [];
+    var theatreNames = [];
+    
+    // Loop through all the movie showtimes of the array that we have selected to get the theatres names by using the index number generated above
+    for (var i = 0; i < movieData[selectedMovie].showtimes.length; i++) {
+        // Create a variable to hold each of the theatre names for each showtime in the array
+        var theatreName = movieData[selectedMovie].showtimes[i].theatre.name;
+        //console.log("Here's the theatre name: " + theatreName);
 
-    // for (var i = 0; selectedMovie.showtimes[i] < movieData.length; i++) {
-    //     var movieShowtimes = [];
-    //     movieShowtimes = selectedMovie.showtimes[i].dateTime;
-    //     console.log("Showtimes: " + movieShowtimes);
-    // }
+        //console.log("Here's all the movieShowtimes: " + movieShowtimes);
+        // Create an if statement using the indexOf method that will create an object with 2 properties: name (holds the name of the theatre) and time (an array that holds the showtimes) but only if that theatre name and time is not present ( == -1) and pushes it to the movieTheatre variable.
+        if (theatreNames.indexOf(theatreName) < 0) {
+            theatreNames.push(theatreName);
+        }   
+    }
 
-    var testList = $("<ul>").addClass("testClass");
+    console.log("All movie theatres and showtimes for this particular movie: " ,theatreNames); 
 
-    var testListItem = $("<li>").text("Here's some text");
-    var restaurantPage = $("<li>").addClass("btn btn-primary btn-dark").html('<a href="./index_restaurant.html">Want to go to Dinner?</a>');
+    // Loop through the movieTheatres array to get all showtimes for each movie and theatre
+    for (var i = 0; i < theatreNames.length; i++){
+        // Create a new variable that will use the filter function to create a new array to hold all of the movie showtimes from the same theatre name
+        var showtimes = movieData[selectedMovie].showtimes.filter(function(showtime){
+            //console.log("DATA", showtime);
+            return showtime.theatre.name == theatreNames[i];
+        });
+        movieTheatres.push({name: theatreNames[i], times: []});
+        //console.log("Showtime: ", showtimes);
+        // Within this loop, then loop through the newy created array stored in the showtimes variable and push all the showtimes into the movieTheatre array
+        for (j = 0; j < showtimes.length; j++){
+            //console.log("Showtimes: " , showtimes[j]);
+            movieTheatres[i].times.push(showtimes[j].dateTime);
+        }
+    }
+    console.log(movieTheatres)
 
-    // var restaurantPage = $("<li>").addClass("btn btn-primary btn-dark dinnerButton").html("What to go to Dinner?");
-    testList.append(testListItem, restaurantPage);
+    //When the user clicks a movie title, grab all the theatres and the corresponding show times and display that in a new div within the movie title div
+    for (let i = 0; i < movieTheatres.length; i++) {
+        var showtimesDIV = $("<div>").addClass("showtimesDIV");
+        //console.log("DIV " + showtimesDIV);
 
-    $(this).parent().append(testList);
+        var theatre = movieTheatres[i].name;
+        console.log("Theatre " + theatre);
+
+        var movieTimes = movieTheatres[i].times.map(function(element) {
+            return moment(element).format('h:mm A');
+        });
+        console.log("Movie times" + movieTimes);
+
+        showtimesDIV.append("<strong>" + theatre + "</strong>" + "<br>" + movieTimes.join(", ") + "<hr>");
+
+        $(this).parent().append(showtimesDIV);
+    }
+
+    var restaurantPage = $("<button>").addClass("btn btn-primary btn-dark dinnerButton").html('<a href="./index_restaurant.html">Want to go to Dinner?</a>');
+
+    $(this).parent().append(restaurantPage);
 
 });
-
-
-// ***************************
-// Display restaurant Info
-// function displayRestaurantInfo() {
-// ***************************
-
-// $(document).on("click", ".dinnerButton", function () {
-
-//     // VARIABLE DECLARATION
-//     var georesults;
-//     var latitude;
-//     var longitude;
-//     // ***************************
-
-//     // $("#submitButton").on("click", function (event) {
-//     event.preventDefault();
-//     //   $("#geolocation-appear-here").empty();
-//     //   $("#restaurant-appear-here").empty();
-//     console.log("****** Dinner Button Clicked ******");
-
-//     //   var zipCode = $("#zipCode").val();
-//     //   $("#zipCode").val("");
-//     var zipCode = localStorage.getItem("zipcode")
-//     console.log("*** Zip Code for Geolocation Calulation: " + zipCode);
-//     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + zipCode + "&key=AIzaSyD2nn48mhiIlV_nDEM-7OTtVwU22wOQa5Y"
-
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         georesults = response;
-//         console.log("Lat: " + georesults.results[0].geometry.location.lat);
-//         console.log("Long: " + georesults.results[0].geometry.location.lng);
-//         latitude = georesults.results[0].geometry.location.lat;
-//         longitude = georesults.results[0].geometry.location.lng;
-//         $("#geolocation-appear-here").html("Latitude: " + latitude + " Longitude: " + longitude);
-
-//         // $("#geolocation-appear-here").text(JSON.stringify(georesults));
-//     });
-
-//     // var restaurantURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=chicago+restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
-//     var restaurantURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + latitude + "," + longitude + "&radius=5000&type=restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
-//     // var restaurantURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=  41.8403395    ,    -87.6137011  &radius=5000&type=restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
-
-//     $.ajax({
-//         url: restaurantURL,
-//         method: "GET"
-//     }).then(function (response) {
-
-//         var restresults = response;
-//         console.log(response);
-//         console.log("Array Length: " + response.results.length);
-
-//         // $("#movie-view").html(JSON.stringify(response,"",4));
-//         // $("#restaurant-appear-here").html(JSON.stringify(response,"",4));
-
-//         for (var i = 0; i < response.results.length; i++) {
-//             console.log("GOING FOR IT");
-//             // Create a DIV to hold each of our restaurants and its description
-//             var restDisplayDiv = $("<div>").addClass("restDIV").addClass("card").attr("style", "width: 18rem");
-
-//             // Create a variable to hold each restaurant name 
-//             var restName = response.results[i].name;
-//             console.log("Restaurant Name: " + restName);
-
-//             // Create an inner DIV for each Restaurant title and description to utilize the card component from Bootstrap
-//             var innerRestDiv = $("<div>").addClass("card-body").attr("id", restName);
-
-//             // Display the movie title in each individual DIV
-//             var nameDisplay = $("<h5>").text("Restaurant Name: " + restName).addClass("restName").addClass("card-title");
-
-//             // Create a variable to hold each Restaurant description
-//             // var movieDescr = response[i].shortDescription;
-
-//             var restOpen = response.results[i].opening_hours.open_now;
-//             console.log("Open: " + restOpen);
-//             var priceLevel = response.results[i].price_level;
-//             console.log("Price Level: " + priceLevel);
-//             var rating = response.results[i].rating;
-//             console.log("Rating: " + rating);
-
-
-//             // Display the Restaurant description in each individual DIV
-//             if (restOpen) {
-//                 var openDisplay = $("<h6>").text("Open").addClass("openDisplay").addClass("card-title");
-//             }
-//             else { var openDisplay = $("<h6>").text("Closed").addClass("openDisplay").addClass("card-title"); }
-//             var priceDisplay = $("<h6>").text("Price Level: " + priceLevel).addClass("priceDisplay").addClass("card-title");
-//             var ratingDisplay = $("<h6>").text("Google Rating: " + rating).addClass("ratingDisplay").addClass("card-title");
-
-//             // Add the movie title and the description to the individual DIV
-//             innerRestDiv.append(nameDisplay, openDisplay, priceDisplay, ratingDisplay)
-
-//             restDisplayDiv.append(innerRestDiv);
-
-//             // Add all the movies to an existing DIV on the apge called movieTitles
-//             // $("#restaurant-appear-here").prepend(restDisplayDiv);
-//             $("#nearbyRestaurants").prepend(restDisplayDiv);
-
-//         }
-
-//     });
-//     // });
-// });

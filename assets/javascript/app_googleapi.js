@@ -8,12 +8,7 @@ var latitude;
 var longitude;
 // ***************************
 
-// $("#submitButton").on("click", function (event) {
-// event.preventDefault();
 console.log("****** Button Clicked ******");
-
-// var zipCode = $("#zipCode").val();
-// $("#zipCode").val("");
 
 var zipCode = localStorage.getItem("zipcode")
 console.log("*** Zip Code for Geolocation Calulation: " + zipCode);
@@ -31,8 +26,6 @@ $.ajax({
   longitude = georesults.results[0].geometry.location.lng;
   googlePlacesCall()
 
-  //  $("#geolocation-appear-here").html("Latitude: "+latitude+" Longitude: "+longitude); 
-  // $("#geolocation-appear-here").text(JSON.stringify(georesults));
 });
 function googlePlacesCall() {
   // var restaurantURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=chicago+restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
@@ -63,11 +56,10 @@ function googlePlacesCall() {
       // Create an inner DIV for each Restaurant title and description to utilize the card component from Bootstrap
       var innerRestDiv = $("<div>").addClass("card-body").attr("id", restName);
 
-      // Display the movie title in each individual DIV
+      // Display the restaurant name in each individual DIV
       var nameDisplay = $("<h5>").text("Restaurant Name: " + restName).addClass("restName").addClass("card-title");
 
       // Create a variable to hold each Restaurant description
-      // var movieDescr = response[i].shortDescription;
 
       var restOpen = response.results[i].opening_hours.open_now;
       console.log("Open: " + restOpen);
@@ -85,12 +77,12 @@ function googlePlacesCall() {
       var priceDisplay = $("<h6>").text("Price Level: " + priceLevel).addClass("priceDisplay").addClass("card-title");
       var ratingDisplay = $("<h6>").text("Google Rating: " + rating).addClass("ratingDisplay").addClass("card-title");
 
-      // Add the movie title and the description to the individual DIV
+      // Add the restaurant name and other info to the individual DIV
       innerRestDiv.append(nameDisplay, openDisplay, priceDisplay, ratingDisplay)
 
       restDisplayDiv.append(innerRestDiv);
 
-      // Add all the movies to an existing DIV on the apge called movieTitles
+      // Add all the restaurants to an existing DIV on the apge called nearbyRestaurants
       // $("#restaurant-appear-here").prepend(restDisplayDiv);
       $("#nearbyRestaurants").prepend(restDisplayDiv);
 
@@ -98,6 +90,5 @@ function googlePlacesCall() {
 
   });
 }
-// });
 
 
