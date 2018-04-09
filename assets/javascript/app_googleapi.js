@@ -55,9 +55,6 @@ function googlePlacesCall() {
     console.log(response);
     console.log("Array Length: " + response.results.length);
 
-    // $("#movie-view").html(JSON.stringify(response,"",4));
-    // $("#restaurant-appear-here").html(JSON.stringify(response,"",4));
-
     for (var i = 0; i < response.results.length; i++) {
       console.log("GOING FOR IT");
       // Create a DIV to hold each of our restaurants and its description

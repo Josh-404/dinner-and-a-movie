@@ -45,6 +45,7 @@ function saveData(userDate, userZipCode, movieTitle, theaterName, movieTime) {
 };
 // **** END OF LOCAL STORAGE CODE ***********
 
+//Validating the user inputs from the form
 function inputValidation(zip, userDate) {
     $("#errorTextZip").empty();
     $("#errorTextDate").empty();
@@ -55,18 +56,17 @@ function inputValidation(zip, userDate) {
     else {
         if ((zip < 10000) || (zip > 99999)) {
             console.log("Input Validation-->Wrong Zip: " + zip);
-            $("#errorTextZip").append("Enter Valid Zip code with 5 Digits: ex. 60647 ")
-            // return false;
+            $("#errorTextZip").append("Enter a valid zip code with 5 Digits (ex. 60647)")
         }
         if ((userDate < moment().format("YYYY-MM-DD"))) {
             console.log("Input validation --> Wrong Date: " + userDate);
-            $("#errorTextDate").append("Enter Valid date [mm/dd/yyyy]. Dates before today are not allowed ")
-            // return false;
+            $("#errorTextDate").append("Enter a valid date (mm/dd/yyyy). Dates before today are not available.")
         }
         return false;
     }
 }
 
+//To display all the movies after the user submits their info
 function submitUserInfo() {
 
     $("#submitButton").on("click", function () {
@@ -83,18 +83,14 @@ function submitUserInfo() {
         if (inputValidation(userZipCode, userDate)) {
             // Calling SaveData() to store info in Firebase
             saveData(userDate, userZipCode, movieTitle, theaterName, movieTime);
-            // Local Storage
-            // Clear absolutely everything stored in localStoßrage using localStorage.clear()
-            localStorage.clear();
 
             // Empty the fields when the submit button is clicked
             $("#movieDate").val("");
             $("#zipCode").val("");
 
             // Create variables to hold the information needed to submit the API call
-            // var apiKey = "gkd947dfsy5spd8zcruwcwa6";
-            //    Alfredo's Key
-            var apiKey = "juzanm2r7beucstd9975h2sk";
+            var apiKey = "gkd947dfsy5spd8zcruwcwa6";
+            //var apiKey = "bdz8ugfm9xze9x33zqwf3zxt";
             var movieDate = userDate;
             var zipCode = userZipCode;
             var queryURL = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;
@@ -105,13 +101,10 @@ function submitUserInfo() {
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
-            // Create variables to hold the information needed to submit the API call
-            // var apiKey = "gkd947dfsy5spd8zcruwcwa6"; //Liz's API Key
-            var apiKey = "juzanm2r7beucstd9975h2sk"; //Alfredo's API Key
-            var movieDate = userDate;
-            var zipCode = userZipCode;
-            var queryURL = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + movieDate + "&zip=" + zipCode + "&imageSize=Sm&imageText=true&api_key=" + apiKey;
-            console.log(queryURL);
+
+                var headerDIVTitle = $("<h3>").text("Movies Playing Near You").addClass("text-center");
+
+                $("#headerDIV").prepend(headerDIVTitle);
 
                 // Store the JSON response in a variable
                 movieData = response;
@@ -121,7 +114,7 @@ function submitUserInfo() {
                 for (var i = 0; i < movieData.length; i++) {
 
                     // Create a DIV to hold each of our movie titles and its description
-                    var movieDisplayDiv = $("<div>").addClass("movieDIV").addClass("card").attr("style", "width: 18rem");
+                    var movieDisplayDiv = $("<div>").addClass("movieDIV").addClass("card").attr("style", "width: 16rem");
 
                     // Create a variable to hold each movie title
                     var movieTitle = [];
@@ -136,7 +129,7 @@ function submitUserInfo() {
                     var innerMovieDiv = $("<div>").addClass("card-body");
 
                     // Display the movie title in each individual DIV
-                    var titleDisplay = $("<h5>").text(movieTitle).addClass("card-title").attr("id", movieID);
+                    var titleDisplay = $("<h5>").text(movieTitle).addClass("card-title movieTitle").attr("id", movieID);
 
                     // Create a variable to hold each movie description
                     var movieDescr = movieData[i].shortDescription;
@@ -158,9 +151,9 @@ function submitUserInfo() {
 };
 
 // Call the function
-
 submitUserInfo();
 
+//To display the movie showtimes after a user clicks on the movie title
 $(document).on("click", "h5", function () {
     // Using 'this', create a variable that grabs the movie ID in the id attribute for the specific movie title that the user has clicked on.
     var movieID = $(this).attr("id");
@@ -226,7 +219,7 @@ $(document).on("click", "h5", function () {
         $(this).parent().append(showtimesDIV);
     }
 
-    var restaurantPage = $("<button>").addClass("btn btn-primary btn-dark dinnerButton").html('<a href="./index_restaurant.html">Want to go to Dinner?</a>');
+    var restaurantPage = $("<button>").addClass("btn btn-dark hvr-underline-from-center dinnerButton").attr("type", "button").html('<a href="./index_restaurant.html">Want to go to Dinner?</a>');
 
     $(this).parent().append(restaurantPage);
 
