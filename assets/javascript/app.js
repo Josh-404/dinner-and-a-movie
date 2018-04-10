@@ -123,6 +123,8 @@ function submitUserInfo() {
                     // Create a DIV to hold each of our movie titles and its description
                     var movieDisplayDiv = $("<div>").addClass("movieDIV").addClass("card").attr("style", "width: 16rem");
 
+                    var cardIMG = $("<img>").addClass("card-img-top").attr("src", "../dinner-and-a-movie/assets/css/popcorn.jpg");
+
                     // Create a variable to hold each movie title
                     var movieTitle = [];
                     movieTitle = movieData[i].title;
@@ -145,6 +147,8 @@ function submitUserInfo() {
                     var descrDisplay = $("<h6>").text(movieDescr).addClass("movieDescr").addClass("card-title");
 
                     // Add the movie title and the description to the individual DIV
+                    movieDisplayDiv.append(cardIMG);
+                    
                     innerMovieDiv.append(titleDisplay, descrDisplay)
 
                     movieDisplayDiv.append(innerMovieDiv);

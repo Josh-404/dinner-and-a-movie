@@ -60,11 +60,13 @@ function googlePlacesCall() {
       // Create a DIV to hold each of our restaurants and its description
       var restDisplayDiv = $("<div>").addClass("restDIV").addClass("card").attr("style", "width: 18rem");
 
+      var cardIMG = $("<img>").addClass("card-img-top").attr("src", "../dinner-and-a-movie/assets/css/restaurant.jpg");
+
       // Create a variable to hold each restaurant name 
       var restName = response.results[i].name;
       console.log("Restaurant Name: " + restName);
 
-      var photoReference = response.results[i].photos[0].photo_reference;
+      //var photoReference = response.results[i].photos[0].photo_reference;
       
       // Create an inner DIV for each Restaurant title and description to utilize the card component from Bootstrap
       var innerRestDiv = $("<div>").addClass("card-body").attr("id", restName);
@@ -91,6 +93,7 @@ function googlePlacesCall() {
       var ratingDisplay = $("<h6>").text("Google Rating: " + rating).addClass("ratingDisplay").addClass("card-title");
 
       // Add the restaurant name and other info to the individual DIV
+      restDisplayDiv.append(cardIMG);
       innerRestDiv.append(nameDisplay, priceDisplay, ratingDisplay)
       innerRestDiv.append(openDisplay);
 
