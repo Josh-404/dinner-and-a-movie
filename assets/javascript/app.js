@@ -49,13 +49,20 @@ function saveData(userDate, userZipCode, movieTitle, theaterName, movieTime) {
 function inputValidation(zip, userDate) {
     $("#errorTextZip").empty();
     $("#errorTextDate").empty();
-    if ((userDate >= moment().format("YYYY-MM-DD")) && ((zip > 10000) && (zip < 99999))) {
+    $("#movieTitles").empty();
+    $("headerDiv").empty();
+    var numberOfDigits = Math.floor(Math.log(zip) / Math.LN10 + 1)
+    // if ((userDate >= moment().format("YYYY-MM-DD")) && ((zip > 10000) && (zip < 99999))) {
+    if ((userDate >= moment().format("YYYY-MM-DD")) && ((zip > 0) && (numberOfDigits==5))) {
         console.log("*********** Input Correct ******");
+        console.log("Number of digits: "+numberOfDigits);
         return true;
     }
     else {
-        if ((zip < 10000) || (zip > 99999)) {
+        // if ((zip < 10000) || (zip > 99999)) {
+        if ((zip <= 0) || (numberOfDigits!=5)) {
             console.log("Input Validation-->Wrong Zip: " + zip);
+            console.log("Number of digits: "+numberOfDigits);
             $("#errorTextZip").append("Enter a valid zip code with 5 Digits (ex. 60647)")
         }
         if ((userDate < moment().format("YYYY-MM-DD"))) {

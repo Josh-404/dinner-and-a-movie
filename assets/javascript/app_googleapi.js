@@ -45,7 +45,7 @@ function googlePlacesCall() {
   // var restaurantURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=chicago+restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
   var restaurantURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + latitude + "," + longitude + "&radius=5000&type=restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
   // var restaurantURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=  41.8403395    ,    -87.6137011  &radius=5000&type=restaurant&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q";
-
+// Photo referece API call https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q&photoreference=
   $.ajax({
     url: restaurantURL,
     method: "GET"
@@ -56,7 +56,7 @@ function googlePlacesCall() {
     console.log("Array Length: " + response.results.length);
 
     for (var i = 0; i < response.results.length; i++) {
-      console.log("GOING FOR IT");
+      console.log("Getting Restaurant "+i);
       // Create a DIV to hold each of our restaurants and its description
       var restDisplayDiv = $("<div>").addClass("restDIV").addClass("card").attr("style", "width: 18rem");
 
@@ -64,6 +64,8 @@ function googlePlacesCall() {
       var restName = response.results[i].name;
       console.log("Restaurant Name: " + restName);
 
+      var photoReference = response.results[i].photos[0].photo_reference;
+      
       // Create an inner DIV for each Restaurant title and description to utilize the card component from Bootstrap
       var innerRestDiv = $("<div>").addClass("card-body").attr("id", restName);
 
@@ -89,17 +91,34 @@ function googlePlacesCall() {
       var ratingDisplay = $("<h6>").text("Google Rating: " + rating).addClass("ratingDisplay").addClass("card-title");
 
       // Add the restaurant name and other info to the individual DIV
-      innerRestDiv.append(nameDisplay, openDisplay, priceDisplay, ratingDisplay)
+      innerRestDiv.append(nameDisplay, priceDisplay, ratingDisplay)
+      innerRestDiv.append(openDisplay);
 
       restDisplayDiv.append(innerRestDiv);
 
       // Add all the restaurants to an existing DIV on the apge called nearbyRestaurants
       // $("#restaurant-appear-here").prepend(restDisplayDiv);
       $("#nearbyRestaurants").prepend(restDisplayDiv);
+      // googlePhotos(photoReference);
+
+     
 
     }
 
   });
 }
+
+// ADDING RESTAURANT PICTURE
+function googlePhotos(reference){
+  var photoURL= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&key=AIzaSyCMv62EJ-6UqQEJhfSK1H2VFhle3CRnC-Q&photoreference="+reference;
+  $.ajax({
+    url: photoURL,
+    method: "GET"
+  }).then(function (response) {
+    var photoResults = response;
+    console.log("Photo reference: "+ reference);
+    $("#nearbyRestaurants").html('<img src="photoResults" alt="Photo reference">');
+})
+};
 
 
