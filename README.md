@@ -16,6 +16,7 @@ The app was made with:
 
 * The [Gracenote Movie API](http://developer.tmsapi.com/docs/data_v1_1/movies/Movies_playing_in_local_theatres) to find movies playing in local theatres based on the user entered date and zip code
 * The [Google Places API](https://developers.google.com/places/web-service/intro) to find restaurants based on the user entered zip code
+* The [Chrome CORS Toggle](https://chrome.google.com/webstore/detail/cors-toggle/jioikioepegflmdnbocfhgmpmopmjkim?hl=en) extension to allow the Google Places API to work in the browser
 * HTML and [Boostrap 4](https://getbootstrap.com/) to style the page elements
 * CSS for custom styling of hover elements over the movie names and media queries to resize the header image on the first page so that it gets resized appropriately in its DIV at smaller screen sizes.
 * [Hover.css](http://ianlunn.github.io/Hover/) to add fun animations to the button elements on the page
