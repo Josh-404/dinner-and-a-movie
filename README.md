@@ -17,9 +17,11 @@ The app was made with:
 * The [Gracenote Movie API](http://developer.tmsapi.com/docs/data_v1_1/movies/Movies_playing_in_local_theatres) to find movies playing in local theatres based on the user entered date and zip code
 * The [Google Places API](https://developers.google.com/places/web-service/intro) to find restaurants based on the user entered zip code
 * HTML and [Boostrap 4](https://getbootstrap.com/) to style the page elements
-* CSS for custom styling of the buttons and media queries to resize the header image on the first page so that it resized appropriately in its DIV at smaller screen sizes.
+* CSS for custom styling of hover elements over the movie names and media queries to resize the header image on the first page so that it gets resized appropriately in its DIV at smaller screen sizes.
 * [Hover.css](http://ianlunn.github.io/Hover/) to add fun animations to the button elements on the page
+* [Google Fonts](https://fonts.google.com/) for the text elements on the page
 * The [jQuery](https://jquery.com/) library for Javascript to dynamically generate the movies showtime and restaurant elements based on the user entered data
+* AJAX to query the APIs
 * [Firebase](https://firebase.google.com/) to store user submitted data
 * [Moment.js](http://momentjs.com/) to format the movie times in an easier to read format (ie. 11:00 AM instead of 2018-04-09T11:00)
 
@@ -38,6 +40,6 @@ The app was made with:
 
 We'd love to build out the app further with the following details:
 
-* Adding more code to filter and refine the results and prevent bad results from displaying. In the future, we'd like to write code to limit the movie results based on a certain timeframe like movies released in the past 1 month or 2 months or only showtimes at certain times. We'd also like to refine the code to skip JSON results when properties were missing. For a few zip codes, some restaurant results did not have one of the properties we wanted to display, so the code would error out.
+* Adding more code to filter and refine the results and prevent bad results from displaying. In the future, we'd like to write code to limit the movie results based on a certain timeframe like movies released in the past 1 month or 2 months or only showtimes at certain times that the user defines. We'd also like to refine the code to skip JSON results when properties were missing. For a few zip codes, some restaurant results did not have one of the properties we wanted to display, so the code would error out.
 
 * Adding more visual elements. In the future, we'd like to try and incorporate the [Open Movie Database API](http://www.omdbapi.com/) to pull in movie posters images to replace it with the movie title or adding restaurant/food pictures for the restaurant results.
