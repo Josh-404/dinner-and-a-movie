@@ -115,7 +115,7 @@ function submitUserInfo() {
 
                 // Store the JSON response in a variable
                 movieData = response;
-                console.log("Movie Data JSON Response: " + movieData);
+                console.dir(movieData);
 
                 // Looping over the results in the JSON object...
                 for (var i = 0; i < movieData.length; i++) {
