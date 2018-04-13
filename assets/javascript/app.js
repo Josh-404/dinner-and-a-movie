@@ -76,7 +76,7 @@ function inputValidation(zip, userDate) {
 //To display all the movies after the user submits their info
 function submitUserInfo() {
 
-    $("#submitButton").on("click", function () {
+    $("#submitButton").on("click touch", function () {
         event.preventDefault();
 
         var userDate = $("#movieDate").val();
