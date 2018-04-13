@@ -76,7 +76,7 @@ function inputValidation(zip, userDate) {
 //To display all the movies after the user submits their info
 function submitUserInfo() {
 
-    $("#submitButton").on("click touch", function () {
+    $("#submitButton").on("click", function () {
         event.preventDefault();
 
         var userDate = $("#movieDate").val();
@@ -165,7 +165,7 @@ function submitUserInfo() {
 submitUserInfo();
 
 //To display the movie showtimes after a user clicks on the movie title
-$(document).on("click", "h5", function () {
+$(document).on("click touchstart", "h5", function () {
     // Using 'this', create a variable that grabs the movie ID in the id attribute for the specific movie title that the user has clicked on.
     var movieID = $(this).attr("id");
     console.log(movieID);
